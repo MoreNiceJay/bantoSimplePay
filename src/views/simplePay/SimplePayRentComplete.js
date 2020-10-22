@@ -56,7 +56,7 @@ export default function App(props) {
             marginLeft: "5%"
           }}
         >
-          <img src={require("../assets/img/logo.png")}></img>
+          {/* <img src={require("../assets/img/logo.png")}></img> */}
           <p
             style={{
               color: "white",
@@ -81,7 +81,7 @@ export default function App(props) {
             fontSize: "24px"
           }}
         >
-          이용방법을 선택해주세요
+          배터리를 빌렸습니다
         </p>
         <div
           style={{
@@ -121,7 +121,7 @@ export default function App(props) {
               props.history.push("/");
             }}
           >
-            <p style={{ fontSize: "32px" }}>앱 다운</p>
+            <p style={{ fontSize: "32px" }}>완료</p>
             <p style={{ marginTop: "8px" }}>
               이벤트와 쿠폰을 이용할 수 있습니다
             </p>
@@ -140,7 +140,7 @@ export default function App(props) {
             }}
             onClick={() => {}}
           >
-            <p style={{ fontSize: "32px" }}>간편 결제</p>
+            <p style={{ fontSize: "32px" }}>완료</p>
             <p style={{ marginTop: "8px" }}>
               앱 다운없이 배터리를 대여할수 있습니다
             </p>

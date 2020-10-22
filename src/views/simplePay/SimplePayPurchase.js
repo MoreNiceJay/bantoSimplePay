@@ -108,19 +108,42 @@ export default function App(props) {
               justifyContent: "center"
             }}
             onClick={() => {
+              //렌트체크 넣기
               axios
-                .post("https://mulli.world/banto2/app/rent/requestRent", {
-                  userId: 2,
-                  stationId: "T1219071904",
-                  slotNum: 3,
-                  couponId: null
+                .post("https://mulli.world/banto2/app/rent/checkUserRenting", {
+                  userUuid: sessionStorage.getItem("userId")
                 })
                 .then((res) => {
-                  console.log(res);
+                  if (res.data.data.bRenting) {
+                    window.alert("현재 대여중입니다. 반납후 다시 시도해주세요");
+                    props.history.push("/");
+                  }
+                  return Promise.resolve("");
+                })
+                .then(() => {
+                  axios
+                    .post(
+                      "https://mulli.world/banto2/app/rent/requestSimpleRent",
+                      {
+                        userId: sessionStorage.getItem("userId"),
+                        stationId: sessionStorage.getItem("stationId"),
+                        couponId: null
+                      }
+                    )
+                    .then((res) => {
+                      window.alert(res.data.data);
+                      console.log(res.data);
+                      if (res.data.code !== 200) {
+                        console.log(res.data.msg);
+                        props.history.push("/simple/rentfail");
+                        return;
+                      }
+                      props.history.push("/simple/rentcomplete");
+                    });
                 });
             }}
           >
-            <p style={{ fontSize: "32px" }}>간편 결제</p>
+            <p style={{ fontSize: "32px" }}>빌리기</p>
             <p style={{ marginTop: "8px" }}>
               앱 다운없이 배터리를 대여할수 있습니다
             </p>

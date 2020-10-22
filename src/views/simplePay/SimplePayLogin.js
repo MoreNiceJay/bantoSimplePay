@@ -37,7 +37,7 @@ export default function App(props) {
     axios
       .post("https://mulli.world/banto2/app/store/getStoreName", {
         // stationId: props.location.state.stationId
-        stationId: "BTSS020200200111"
+        stationId: sessionStorage.getItem("stationId")
       })
       .then((value) => {
         if (value.data.code !== 200) {
@@ -84,7 +84,7 @@ export default function App(props) {
                   let phoneNumber =
                     firstRes.data.data.kakao_account.phone_number;
 
-                  phoneNumber = "+82 10-9455-2438";
+                  // phoneNumber = "+82 10-9455-2438";
 
                   phoneNumber = phoneNumber.replace(" ", "");
                   phoneNumber = phoneNumber.replace(/-/gi, "");
@@ -107,14 +107,8 @@ export default function App(props) {
                 })
               )
               .then((res) => {
-                window.alert(res.data.data.userUuid);
                 setUserId(res.data.data.userUuid);
-                // sessionStorage.setItem("userId", "" + String(res.data.userId));
-                sessionStorage.setItem(
-                  "userUuid",
-                  String(res.data.data.userUuid)
-                );
-                sessionStorage.setItem("stationId", "BTSS020200200111");
+                sessionStorage.setItem("userId", res.data.data.userUuid);
 
                 return axios
                   .post(
@@ -161,7 +155,7 @@ export default function App(props) {
           axios.spread((firstRes, secondRes) => {
             const payment = firstRes.data.data.payment;
             const bRenting = secondRes.data.data.bRenting;
-            console.log(sessionStorage.getItem("userId"));
+
             if (bRenting) {
               sessionStorage.clear();
               window.alert(

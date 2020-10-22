@@ -34,18 +34,11 @@ export default function App(props) {
       })
       .then((res) => {
         setData(res.data);
-        console.log("?", res);
-
-        console.log("?", res.data.data.redirectUrl);
-        // window.alert(res.data.next_redirect_app_url);
-        // window.location.href = res.data.next_redirect_app_url;
-        // window.open(res.data.next_redirect_app_url);
 
         if (
-          String(window.location).search("zubbh.csb.app") > 0 &&
+          String(window.location).search("s636o.csb.app") > 0 &&
           res.data.code === 200
         ) {
-          window.alert("들어옴");
           window.location.href = res.data.data.redirectUrl;
           // window.open(res.data.data.redirectUrl, "_blank");
           // window.open(res.data.data.redirectUrl);
@@ -129,7 +122,7 @@ export default function App(props) {
               justifyContent: "center"
             }}
             onClick={() => {
-              registerKakaoPay("Fs9W4ytEr5MIoqaNoezFgyxAd4v1");
+              registerKakaoPay(sessionStorage.getItem("userId"));
             }}
           >
             <p style={{ fontSize: "32px" }}>카카오페이 등록</p>

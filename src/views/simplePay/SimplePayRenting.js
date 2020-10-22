@@ -32,7 +32,6 @@ export default function App(props) {
   }
 
   React.useEffect(() => {
-    // console.log(props.location.state);
     if (props.location.state !== undefined) {
       setStationId(props.location.state.stationId);
     }

@@ -34,6 +34,8 @@ export default function App(props) {
     // }
     if (props.location.state !== undefined) {
       setStationId(props.location.state.stationId);
+
+      sessionStorage.setItem("stationId", props.location.state.stationId);
     }
   }, []);
   return (
@@ -55,7 +57,7 @@ export default function App(props) {
             marginLeft: "5%"
           }}
         >
-          <img src={require("../assets/img/logo.png")}></img>
+          <img src={require("../assets/img/bantologo_white.png")}></img>
           <p
             style={{
               color: "white",
