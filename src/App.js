@@ -666,7 +666,6 @@ export default function App(props) {
         <div className={classes.footerTexts}>
           <p>회사명 반토 주식회사</p>
           <p>대표자 이장협</p>
-          <p>연락처 010 9455 2438</p>
           <p>사업자 등록번호 187-87-01044 </p>
           <p>주소 서울 영등포구 대림동 851-100 하나세인스톤 </p>
           <p>통신판매업 2019-서울 영등포-0459 </p>
