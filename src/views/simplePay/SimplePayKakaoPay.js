@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
+import { Link } from "react-router-dom";
 const useStyles = makeStyles({});
 export default function App(props) {
   const classes = useStyles();
@@ -30,7 +31,7 @@ export default function App(props) {
   function registerKakaoPay(userId) {
     axios
       .post("https://mulli.world/banto2/app/user/registerKakaoPay", {
-        userUuid: userId
+        userId: userId
       })
       .then((res) => {
         setData(res.data);
@@ -57,78 +58,81 @@ export default function App(props) {
     <>
       <div
         style={{
-          backgroundColor: "black",
+          backgroundColor: "#0B0B0C",
           height: "100vh",
           width: "100vw"
+          // display: "flex",
+          // flexDirection: "column",
+          // justifyContent: "center",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "rows",
-            alignItems: "center",
-            paddingTop: "20px",
-
-            marginLeft: "5%"
-          }}
-        >
-          <img src={require("../../assets/img/logo.png")}></img>
+        <div style={{ paddingTop: "50%" }}>
           <p
             style={{
+              top: "50%",
               color: "white",
-
-              alignText: "left",
-              position: "relative",
-              marginLeft: "8px",
-              bottom: "12px",
-              paddingTop: "30px",
-              fontSize: "16px"
+              fontFamily: " Montserrat",
+              fontStyle: "normal",
+              fontWeight: "800",
+              fontSize: "40px",
+              marginLeft: "32px"
             }}
           >
-            반토 보조배터리 대여서비스
+            2 / 2
           </p>
-        </div>
-        <p
-          style={{
-            color: "white",
-            alignText: "left",
-            marginLeft: "5%",
-            paddingTop: "20px",
-            fontSize: "24px"
-          }}
-        >
-          결제를 위해 카카오페이를 등록합니다
-        </p>
-        <div
-          style={{
-            backgroundColor: "black",
-            height: "80%",
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "space-evenly"
-          }}
-        >
           <div
             style={{
-              backgroundColor: "white",
-              width: "90%",
-              height: "35%",
-              borderRadius: "14px",
+              color: "white",
+              marginTop: "16px",
+              marginLeft: "32px",
+              lineHeight: "27px",
+              fontSize: "18px"
+            }}
+          >
+            <p>
+              <span style={{ color: "#FFD95A" }}>카카오페이 등록</span>후
+            </p>
+            <p>보조배터리를 대여할 수 있습니다</p>
+          </div>
+
+          <div
+            style={{
+              backgroundColor: "#0B0B0C",
+              height: "80%",
+              width: "100%",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              justifyContent: "center"
-            }}
-            onClick={() => {
-              registerKakaoPay(sessionStorage.getItem("userId"));
+              marginTop: "52px"
+              // justifyContent: "space-evenly"
             }}
           >
-            <p style={{ fontSize: "32px" }}>카카오페이 등록</p>
-            <p style={{ marginTop: "8px" }}>
-              카카오페이를 결제수단으로 이용합니다
-            </p>
+            <div
+              style={{
+                width: "calc(100% - 32px)",
+                height: "56px",
+                borderRadius: "14px",
+                display: "flex",
+                flexDirection: "rows",
+                alignItems: "center",
+                justifyContent: "center",
+                border: "2px solid #FFD95A",
+                backgroundColor: "#0B0B0C",
+                color: "#FFD95A",
+                marginTop: "100px"
+              }}
+              onClick={() => {
+                registerKakaoPay(sessionStorage.getItem("userId"));
+              }}
+            >
+              <img
+                style={{
+                  marginRight: "10px"
+                }}
+                src={require("../../assets/img/kakao.png")}
+              />
+              <p style={{ fontSize: "18px" }}>카카오페이 등록</p>
+            </div>
           </div>
         </div>
       </div>

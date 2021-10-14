@@ -36,10 +36,10 @@ export default function App(props) {
   //   axios
   //     .all([
   //       axios.post("https://mulli.world/banto2/app/user/checkUserPayment", {
-  //         userUuid: "Fs9W4ytEr5MIoqaNoezFgyxAd4v1"
+  //         userId: "Fs9W4ytEr5MIoqaNoezFgyxAd4v1"
   //       }),
   //       axios.post("https://mulli.world/banto2/app/rent/checkUserRenting", {
-  //         userUuid: "Fs9W4ytEr5MIoqaNoezFgyxAd4v1"
+  //         userId: "Fs9W4ytEr5MIoqaNoezFgyxAd4v1"
   //       })
   //     ])
   //     .then(
@@ -76,7 +76,7 @@ export default function App(props) {
     <>
       <div
         style={{
-          backgroundColor: "black",
+          backgroundColor: "#0B0B0C",
           height: "100vh",
           width: "100vw"
         }}
@@ -84,72 +84,99 @@ export default function App(props) {
         <div
           style={{
             display: "flex",
-            flexDirection: "rows",
-            alignItems: "center",
-            paddingTop: "20px",
-
-            marginLeft: "5%"
-          }}
-        >
-          <img src={require("../assets/img/logo.png")}></img>
-          <p
-            style={{
-              color: "white",
-
-              alignText: "left",
-              position: "relative",
-              marginLeft: "8px",
-              bottom: "12px",
-              paddingTop: "30px",
-              fontSize: "16px"
-            }}
-          >
-            반토 보조배터리 대여서비스
-          </p>
-        </div>
-        <p
-          style={{
-            color: "white",
-            alignText: "left",
-            marginLeft: "5%",
-            paddingTop: "20px",
-            fontSize: "24px"
-          }}
-        >
-          등록이 완료되었습니다
-        </p>
-        <div
-          style={{
-            backgroundColor: "black",
-            height: "80%",
-            width: "100%",
-            display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            justifyContent: "space-evenly"
+            color: "#EAEBF1",
+            lineHeight: "36px",
+            fontSize: "24px",
+            fontWeight: "600",
+            paddingTop: "30%",
+            backgroundColor: "#0B0B0C"
           }}
         >
-          <a href="/simple/purchase">헤이</a>
-          <a href="/simple/purchase">헤이</a>
-          <Link to="simple/purchase">
-            <div
+          <img src={require("../assets/img/registSuccess.png")}></img>
+
+          <p style={{ marginTop: "50px" }}>등록이 완료됐습니다!</p>
+          <p>
+            지금 바로 <span style={{ color: "#00E676" }}>보조배터리</span>를
+          </p>
+          <p>대여할 수 있습니다</p>
+        </div>
+        <div
+          style={{
+            position: "fixed",
+            bottom: "44px",
+            width: "100%"
+          }}
+        >
+          <p
+            style={{
+              textAlign: "center",
+              color: "#EAEBF1",
+              fontSize: "18px",
+              fontWeight: "500"
+            }}
+          >
+            대여 하시겠습니까?
+          </p>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              height: "100%",
+              marginTop: "24px",
+              textAlign: "center"
+            }}
+          >
+            <Link
               style={{
-                backgroundColor: "white",
-                width: "90%",
-                height: "35%",
-                borderRadius: "14px",
-                display: "flex",
-                flexDirection: "column",
+                backgroundColor: "#0B0B0C",
+                border: "2px solid #535362",
+                boxSizing: "border-box",
+                borderRadius: "13px",
+                color: "#535362",
+                height: "24px",
+                width: "50%",
+                marginRight: "4px",
+                marginLeft: "32px",
+                textAlign: "center",
                 alignItems: "center",
-                justifyContent: "center"
+                height: "48px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                fontSize: "16px",
+                fontWeight: "600"
               }}
+              to="/"
             >
-              <p style={{ fontSize: "32px" }}>카카오페이 등록</p>
-              <p style={{ marginTop: "8px" }}>
-                카카오페이를 결제수단으로 이용합니다
-              </p>
-            </div>
-          </Link>
+              다음에
+            </Link>
+            <Link
+              style={{
+                backgroundColor: "#EAEBF1",
+                border: "none",
+                boxSizing: "border-box",
+                borderRadius: "13px",
+                color: "#535362",
+                height: "24px",
+                width: "50%",
+                marginLeft: "4px",
+                marginRight: "32px",
+                height: "48px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                fontSize: "16px",
+                fontWeight: "600"
+              }}
+              to="simple/purchase"
+            >
+              대여 할게요
+            </Link>
+          </div>
         </div>
       </div>
     </>

@@ -42,7 +42,7 @@ export default function App(props) {
     <>
       <div
         style={{
-          backgroundColor: "black",
+          backgroundColor: "#0B0B0C",
           height: "100vh",
           width: "100vw"
         }}
@@ -50,21 +50,23 @@ export default function App(props) {
         <div
           style={{
             display: "flex",
-            flexDirection: "rows",
+            flexDirection: "column",
             alignItems: "center",
-            paddingTop: "20px",
-
-            marginLeft: "5%"
+            paddingTop: "50px"
           }}
         >
-          <img src={require("../assets/img/bantologo_white.png")}></img>
+          <img
+            style={{ width: "196px", height: "auto" }}
+            src={require("../assets/img/light.png")}
+          ></img>
           <p
             style={{
               color: "white",
-
+              height: "42px",
               alignText: "left",
               position: "relative",
-              marginLeft: "8px",
+              color: "#EAEBF1",
+              opacity: "0.8",
               bottom: "12px",
               paddingTop: "30px",
               fontSize: "16px"
@@ -73,17 +75,7 @@ export default function App(props) {
             반토 보조배터리 대여서비스
           </p>
         </div>
-        <p
-          style={{
-            color: "white",
-            alignText: "left",
-            marginLeft: "5%",
-            paddingTop: "20px",
-            fontSize: "24px"
-          }}
-        >
-          이용방법을 선택해주세요
-        </p>
+
         <div
           style={{
             backgroundColor: "black",
@@ -92,19 +84,17 @@ export default function App(props) {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            justifyContent: "space-evenly"
+            justifyContent: "space-evenly",
+            marginTop: "30px"
           }}
         >
           <div
             style={{
-              backgroundColor: "grey",
-              width: "90%",
-              height: "35%",
-              borderRadius: "14px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center"
+              backgroundColor: "#EAEBF1",
+              boxShadow: "0px 5px 14px #000000",
+              width: "calc(100% - 64px)",
+              height: "184px",
+              borderRadius: "20px"
             }}
             onClick={() => {
               window.alert(checkMobile());
@@ -122,34 +112,192 @@ export default function App(props) {
               props.history.push("/");
             }}
           >
-            <p style={{ fontSize: "32px" }}>앱 다운</p>
-            <p style={{ marginTop: "8px" }}>
-              이벤트와 쿠폰을 이용할 수 있습니다
-            </p>
+            <div
+              style={{
+                marginLeft: "24px",
+                height: "100%",
+                display: "flex",
+                flexDirection: "column"
+                // justifyContent: "space-evenly"
+              }}
+            >
+              <p
+                style={{
+                  marginTop: "32px",
+                  fontSize: "26px",
+                  fontFamily: "Noto Sans KR",
+                  fontWeight: "900"
+                }}
+              >
+                앱 다운
+              </p>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "rows",
+                  justifyContent: "space-between",
+                  alignItems: "center"
+                }}
+              >
+                <div style={{ marginTop: "4px" }}>
+                  <p
+                    style={{
+                      lineHeight: "24px",
+                      fontFamily: "Noto Sans KR",
+                      fontSize: "14px"
+                    }}
+                  >
+                    이벤트, 쿠폰 등 다양한 혜택을
+                  </p>
+                  <p
+                    style={{
+                      fontFamily: "Noto Sans KR",
+                      fontSize: "14px"
+                    }}
+                  >
+                    받을 수 있습니다.
+                  </p>
+                </div>
+
+                <img
+                  style={{
+                    marginRight: "24px",
+                    height: "52px",
+                    width: "auto",
+                    marginTop: "3.5px",
+                    marginBottom: "3.5px"
+                  }}
+                  src={require("../assets/img/card - logo.png")}
+                ></img>
+              </div>
+
+              <div
+                style={{
+                  marginTop: "20px"
+                }}
+              >
+                <p
+                  style={{
+                    backgroundColor: "#15151A",
+                    color: "white",
+                    borderRadius: "8px",
+                    display: "inline",
+                    padding: "4px 12px",
+                    fontSize: "14px",
+                    fontWeight: "600"
+                  }}
+                >
+                  신용카드 + 카카오페이
+                </p>
+              </div>
+            </div>
           </div>
 
           <div
             style={{
-              backgroundColor: "white",
-              width: "90%",
-              height: "35%",
-              borderRadius: "14px",
+              backgroundColor: "#0B0B0C",
+              height: "80%",
+              width: "100%",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              justifyContent: "center"
-            }}
-            onClick={() => {
-              props.history.push({
-                pathname: "/simple/login",
-                state: { stationId: stationId }
-              });
+              marginTop: "40px"
             }}
           >
-            <p style={{ fontSize: "32px" }}>간편 결제</p>
-            <p style={{ marginTop: "8px" }}>
-              앱 다운없이 배터리를 대여할수 있습니다
-            </p>
+            <div
+              style={{
+                backgroundColor: "#FFD95A",
+                boxShadow: "0px 5px 14px #000000",
+                width: "calc(100% - 64px)",
+                height: "184px",
+                borderRadius: "20px",
+                display: "flex",
+                flexDirection: "column"
+              }}
+              onClick={() => {
+                props.history.push({
+                  pathname: "/simple/login",
+                  state: { stationId: stationId }
+                });
+              }}
+            >
+              <div
+                style={{
+                  marginLeft: "24px",
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column"
+                  // justifyContent: "space-evenly"
+                }}
+              >
+                <p
+                  style={{
+                    marginTop: "32px",
+                    fontSize: "26px",
+                    fontFamily: "Noto Sans KR",
+                    fontWeight: "900"
+                  }}
+                >
+                  간편 이용
+                </p>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "rows",
+                    justifyContent: "space-between",
+                    alignItems: "center"
+                  }}
+                >
+                  <div style={{ marginTop: "4px" }}>
+                    <p
+                      style={{
+                        lineHeight: "24px",
+                        fontFamily: "Noto Sans KR",
+                        fontSize: "14px"
+                      }}
+                    >
+                      앱 다운 없이 배터리를
+                    </p>
+                    <p
+                      style={{
+                        fontFamily: "Noto Sans KR",
+                        fontSize: "14px"
+                      }}
+                    >
+                      대여할 수 있습니다
+                    </p>
+                  </div>
+
+                  <img
+                    style={{
+                      marginRight: "24px",
+                      height: "59px"
+                    }}
+                    src={require("../assets/img/payment_icon_vertical_large 1.png")}
+                  ></img>
+                </div>
+
+                <div
+                  style={{
+                    marginTop: "20px"
+                  }}
+                >
+                  <p
+                    style={{
+                      backgroundColor: "#15151A",
+                      color: "#FFD95A",
+                      borderRadius: "8px",
+                      display: "inline",
+                      padding: "4px 12px",
+                      fontSize: "14px",
+                      fontWeight: "600"
+                    }}
+                  >
+                    카카오페이
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

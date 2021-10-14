@@ -55,7 +55,7 @@ export default function App(props) {
             marginLeft: "5%"
           }}
         >
-          <img src={require("../assets/img/logo.png")}></img>
+          {/* <img src={require("../assets/img/logo.png")}></img> */}
           <p
             style={{
               color: "white",
