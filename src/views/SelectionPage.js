@@ -216,7 +216,9 @@ export default function App(props) {
               }}
               onClick={() => {
                 props.history.push({
-                  pathname: "/simple/login",
+                  // pathname: "/simple/login",
+                  pathname: "simple/purchase",
+
                   state: { stationId: stationId }
                 });
               }}
