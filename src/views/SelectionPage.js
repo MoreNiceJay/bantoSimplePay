@@ -55,10 +55,11 @@ export default function App(props) {
             paddingTop: "50px"
           }}
         >
-          <img
+          {/* <img
             style={{ width: "196px", height: "auto" }}
             src={require("../assets/img/light.png")}
-          ></img>
+          ></img> */}
+          <p style={{ color: "white", fontSize: "40px", letterSpacing: "2px", }}>Banto</p>
           <p
             style={{
               color: "white",
@@ -85,10 +86,10 @@ export default function App(props) {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "space-evenly",
-            marginTop: "30px"
+            marginTop: "14px"
           }}
         >
-          <div
+          {/* <div
             style={{
               backgroundColor: "#EAEBF1",
               boxShadow: "0px 5px 14px #000000",
@@ -157,9 +158,9 @@ export default function App(props) {
                   >
                     받을 수 있습니다.
                   </p>
-                </div>
+                </div> */}
 
-                <img
+          {/* <img
                   style={{
                     marginRight: "24px",
                     height: "52px",
@@ -168,7 +169,17 @@ export default function App(props) {
                     marginBottom: "3.5px"
                   }}
                   src={require("../assets/img/card - logo.png")}
-                ></img>
+                ></img> */}
+          {/* <p style={{
+                  marginRight: "24px",
+                  height: "52px",
+                  width: "auto",
+                  marginTop: "3.5px",
+                  marginBottom: "3.5px",
+                  fontSize: "65px",
+                  fontWeight: "bold",
+                  letterSpacing: "-5px"
+                }}>B.</p>
               </div>
 
               <div
@@ -191,7 +202,7 @@ export default function App(props) {
                 </p>
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div
             style={{
@@ -201,7 +212,7 @@ export default function App(props) {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              marginTop: "40px"
+              marginTop: "25px"
             }}
           >
             <div
@@ -216,8 +227,8 @@ export default function App(props) {
               }}
               onClick={() => {
                 props.history.push({
-                  // pathname: "/simple/login",
-                  pathname: "simple/purchase",
+                  pathname: "/simple/login",
+                  // pathname: "simple/purchase",
 
                   state: { stationId: stationId }
                 });

@@ -13,6 +13,8 @@ import SimplePayRentComplete from "../src/views/simplePay/SimplePayRentComplete.
 import SimplePayRentFail from "../src/views/simplePay/SimplePayRentFail.js";
 import SimplePayRenting from "../src/views/simplePay/SimplePayRenting.js";
 
+import ApproveKakaoPay from "../src/views/simplePay/ApproveKakaoPay.js";
+
 import GeoPolicy from "../src/views/policies/GeoPolicy.js";
 import PrivateInfo from "../src/views/policies/PrivateInfo.js";
 import RefundPolicy from "../src/views/policies/RefundPolicy.js";
@@ -42,6 +44,7 @@ ReactDOM.render(
         />
         <Route Z exact path="/simple/rentfail" component={SimplePayRentFail} />
         <Route Z exact path="/simple/renting" component={SimplePayRenting} />
+        <Route path="/approveKakaoPay" component={ApproveKakaoPay} />
 
         {/* policy */}
         <Route Z exact path="/policy/geo_policy" component={GeoPolicy} />

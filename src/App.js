@@ -402,6 +402,7 @@ export default function App(props) {
           {" "}
           <CloseSharpIcon />{" "}
         </a>
+
         <ul className={classes.appHeader__menuIsOpened}>
           <li>
             <Link to="/" className={classes.a}>
@@ -456,6 +457,11 @@ export default function App(props) {
           </Link>
         </div>
         <ul className={classes.appHeader__menu}>
+          {/* <li>
+            <Link to="/?stationId=BTSS20210100492" className={classes.a}>
+              서비스 소개
+            </Link>
+          </li> */}
           <li>
             <Link to="/" className={classes.a}>
               서비스 소개
@@ -513,6 +519,9 @@ export default function App(props) {
         <div className={classes.leftTexts}>
           <div className="">
             <p className={classes.leftText}>나의 시간</p>
+            <li>
+
+            </li>
             <p className={classes.leftText}>그리고 반토</p>
           </div>
           <div className={classes.iconContainer}>

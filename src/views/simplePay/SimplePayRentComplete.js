@@ -2,7 +2,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import constants from "../../Constants"
+import Button from "./components/Button"
 const useStyles = makeStyles({
   returnDiv: {}
 });
@@ -37,10 +38,10 @@ export default function App(props) {
 
   //   axios
   //     .all([
-  //       axios.post("https://mulli.world/banto2/app/user/checkUserPayment", {
+  //       axios.post(constants.hosts.banto + "/banto2/app/user/checkUserPayment", {
   //         userId: "Fs9W4ytEr5MIoqaNoezFgyxAd4v1"
   //       }),
-  //       axios.post("https://mulli.world/banto2/app/rent/checkUserRenting", {
+  //       axios.post(constants.hosts.banto + "/banto2/app/rent/checkUserRenting", {
   //         userId: "Fs9W4ytEr5MIoqaNoezFgyxAd4v1"
   //       })
   //     ])
@@ -102,7 +103,7 @@ export default function App(props) {
             alt="complete"
           ></img>
 
-          <p style={{ marginTop: "50px" }}>대여가 완료됐습니다</p>
+          <p style={{ marginTop: "50px" }}>반납이 완료됐습니다</p>
         </div>
         <div
           style={{
@@ -171,6 +172,12 @@ export default function App(props) {
             </p>
           </div>
         </div>
+        <Button
+          callback={async () => {
+            props.history.push("/")
+            return
+          }}
+        >확인</Button>
       </div>
     </>
   );

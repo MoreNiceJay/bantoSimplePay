@@ -2,6 +2,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import constants from "../../Constants"
+
 const useStyles = makeStyles({});
 export default function App(props) {
   const classes = useStyles();
@@ -28,24 +30,22 @@ export default function App(props) {
       return "other";
     }
   }
-  function registerKakaoPay(userId) {
-    axios
-      .post("https://mulli.world/banto2/app/user/registerKakaoPay", {
+  async function registerKakaoPay(userId) {
+    const registerKakao = await axios
+      .post(constants.hosts.banto +
+        "/banto2/app/user/registerKakaoPay", {
         userId: userId
       })
-      .then((res) => {
-        setData(res.data);
+    setData(registerKakao.data);
+    console.log(String(window.location).search("banto.io") > 0 &&
+      registerKakao.data.code === 200)
+    if (
 
-        if (
-          String(window.location).search("s636o.csb.app") > 0 &&
-          res.data.code === 200
-        ) {
-          window.location.href = res.data.data.redirectUrl;
-          // window.open(res.data.data.redirectUrl, "_blank");
-          // window.open(res.data.data.redirectUrl);
-          // window.open(res.data.data.redirectUrl, "_blank");
-        }
-      });
+      (String(window.location).search("banto.io") > 0 || String(window.location).search("localhost") > 0) &&
+      registerKakao.data.code === 200
+    ) {
+      window.location.href = registerKakao.data.data.redirectUrl;
+    }
   }
 
   React.useEffect(() => {
@@ -121,8 +121,10 @@ export default function App(props) {
                 color: "#FFD95A",
                 marginTop: "100px"
               }}
-              onClick={() => {
-                registerKakaoPay(sessionStorage.getItem("userId"));
+              onClick={async () => {
+
+                await registerKakaoPay(sessionStorage.getItem("userId"));
+
               }}
             >
               <img

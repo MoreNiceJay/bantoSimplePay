@@ -4,12 +4,13 @@ import Paper from "@material-ui/core/Paper";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
+import Button from "./components/Button"
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import constants from "../../Constants"
 
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
@@ -44,7 +45,28 @@ export default function App(props) {
     if (props.location.state !== undefined) {
       setStationId(props.location.state.stationId);
     }
-  });
+
+  }, []);
+  React.useEffect(() => {
+    (async () => {
+      const userRentInfo = await axios
+        .post(constants.hosts.banto + "/banto2/app/rent/checkUserRenting", {
+          userId: sessionStorage.getItem("userId")
+        })
+
+      if (userRentInfo.data.code !== 200) {
+        window.alert("시스템 에러: 반토 고객센터에 문의하세요");
+        // props.history.push("/");
+        return;
+      }
+      if (userRentInfo.data.data.bRenting) {
+        // window.alert("현재 대여중입니다. 반납후 다시 시도해주세요");
+        props.history.push("/simple/renting");
+        return;
+      }
+    })()
+
+  }, [])
 
   const handleClose = () => {
     setOpen(false);
@@ -108,50 +130,56 @@ export default function App(props) {
     return String(x).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
-  // React.useEffect(() => {
-  //   axios
-  //     .post("https://mulli.world/banto2/app/user/checkUserPayment", {
-  //       userId: sessionStorage.getItem("userId")
-  //     })
-  //     .then((res) => {
-  //       if (res.data.code !== 200) {
-  //         window.alert(res.data.msg);
-  //         props.history.push("/");
-  //       }
-  //       const payment = res.data.data.payment;
-  //       let elem = document.getElementById("payment");
-  //       if (payment === "kakaoPay") {
-  //         elem.innerHTML = "결제수단: 카카오페이";
-  //       } else if (payment === "creditCard") {
-  //         elem.innerHTML = "결제수단: 신용카드";
-  //       } else {
-  //       }
-  //     });
-  //   axios
-  //     .post("https://mulli.world/banto2/app/price/getPriceInfo", {
-  //       stationId: "T1219071904"
-  //     })
-  //     .then((res) => {
-  //       console.log(res);
-  //       if (res.status !== 200) {
-  //         console.log(res.msg);
-  //       }
-  //       setPriceInfo(res.data);
-  //     });
-  //   axios
-  //     .post("https://mulli.world/banto2/app/store/getStoreName", {
-  //       // stationId: sessionStorage.getItem("stationId")
-  //       stationId: sessionStorage.getItem("stationId")
-  //     })
-  //     .then((value) => {
-  //       if (value.data.code !== 200) {
-  //         window.alert(value.data.msg);
-  //         // props.history.push();
-  //       }
-  //       let elem = document.getElementById("storeName");
-  //       elem.innerHTML = value.data.data.storeName;
-  //     });
-  // }, []);
+  React.useEffect(() => {
+    (async () => {
+
+      const checkUserPayment = await axios
+        .post(constants.hosts.banto + "/banto2/app/user/checkUserPayment", {
+          userId: sessionStorage.getItem("userId")
+        })
+
+      if (checkUserPayment.data.code !== 200) {
+      }
+      const payment = checkUserPayment.data.data.payment;
+      let elem = document.getElementById("payment");
+      if (payment === "kakaoPay") {
+        elem.innerHTML = "카카오페이";
+      } else if (payment === "creditCard") {
+        elem.innerHTML = "신용카드";
+      } else {
+      }
+
+      const priceInfo = await axios
+        .post(constants.hosts.banto +
+          "/banto2/app/price/getPriceInfo", {
+          stationId: sessionStorage.getItem("stationId")
+        })
+
+      // console.log(res);
+      if (priceInfo.status !== 200) {
+        console.log(priceInfo.msg);
+      }
+      setPriceInfo(priceInfo.data);
+
+      const storeName = await axios
+        .post(constants.hosts.banto + "/banto2/app/store/getStoreName", {
+          // stationId: sessionStorage.getItem("stationId")
+          stationId: sessionStorage.getItem("stationId")
+        })
+      // if (value.data.code !== 200) {
+      //   window.alert(value.data.msg);
+      //   // props.history.push();
+      // }
+      let storeelem = document.getElementById("storeName");
+      if (typeof elem === "undefined") {
+        storeelem.innerHTML = ""
+        return
+      }
+      storeelem.innerHTML = storeName.data.data.storeName;
+
+    })()
+
+  }, []);
   return (
     <>
       <head></head>
@@ -177,7 +205,7 @@ export default function App(props) {
               color: "#eaebf1"
             }}
           >
-            기본결제금액
+            락해제금액
           </p>
           <p
             style={{
@@ -242,10 +270,10 @@ export default function App(props) {
                   marginRight: "16px"
                 }}
               >
-                {/* *미반납 시({priceInfo && priceInfo.data.missingTime}
+                *미반납 시({priceInfo && priceInfo.data.missingTime}
                 시간) 이후{" "}
                 {priceInfo && numberWithCommas(priceInfo.data.missingPrice)}원의
-                분실비용이 부가 되오니 꼭 반납을 부탁드립니다. */}
+                분실비용이 부가 되오니 꼭 반납을 부탁드립니다.
               </p>
             </div>
             <div
@@ -303,8 +331,8 @@ export default function App(props) {
                   className="purchaseDetailLittleText"
                   id="storeName"
                 >
-                  {/* {priceInfo && numberWithCommas(priceInfo.data.discount_price)}
-                  원 */}
+                  {priceInfo && numberWithCommas(priceInfo.data.discount_price)}
+                  원
                 </p>
               </div>
               <div
@@ -385,8 +413,8 @@ export default function App(props) {
                   }}
                   className="purchaseDetailLittleText"
                 >
-                  {/* {priceInfo && priceInfo.data.extraTerm}시간/
-                  {priceInfo && priceInfo.data.extraPrice}원 */}
+                  {priceInfo && priceInfo.data.extraTerm}분/
+                  {priceInfo && priceInfo.data.extraPrice}원
                 </p>
               </div>
               <div
@@ -474,94 +502,104 @@ export default function App(props) {
           에 대해 동의하시면 아래 동의 후 대여하기를 눌러주세요
         </p>
 
-        <button
+        <Button
           // disabled="true"
-          style={{
-            width: "100%",
-            height: "66px",
-            width: "calc(100% - 32px)",
-            background: "#EAEBF1",
-            borderRadius: "15px",
-            border: "none",
-            fontFamily: "Noto Sans KR",
-            fontStyle: "normal",
-            fontWeight: "500",
-            fontSize: "18px",
-            lineHeight: "27px",
-            marginTop: "40px",
-            marginLeft: "16px",
-            marginRight: "16px"
-          }}
+          // style={{
+          //   width: "100%",
+          //   height: "66px",
+          //   width: "calc(100% - 32px)",
+          //   background: "#EAEBF1",
+          //   borderRadius: "15px",
+          //   border: "none",
+          //   fontFamily: "Noto Sans KR",
+          //   fontStyle: "normal",
+          //   fontWeight: "500",
+          //   fontSize: "18px",
+          //   lineHeight: "27px",
+          //   marginTop: "40px",
+          //   marginLeft: "16px",
+          //   marginRight: "16px"
+          // }}
           className="purchaseForWebButton"
-          onClick={async () => {
-            console.log("stationId", stationId);
-            // axios
-            //   .post("https://mulli.world/banto2/app/rent/checkUserRenting", {
-            //     userId: sessionStorage.getItem("userId")
-            //   })
-            //   .then((res) => {
-            //     if (res.data.code !== 200) {
-            //       // window.alert("시스템 에러: 반토 고객센터에 문의하세요");
-            //       // props.history.push("/");
-            //       return;
-            //     }
-            //     if (res.data.data.bRenting) {
-            //       // window.alert("현재 대여중입니다. 반납후 다시 시도해주세요");
-            //       // props.history.push("/");
-            //       return;
-            //     }
-            //     axios
-            //       .post("https://mulli.world/banto2/app/store/getStationInfo", {
-            //         stationId: sessionStorage.getItem("stationId")
-            //       })
-            //       .then((res) => {
-            //         if (res.data.code !== 200) {
-            //           // window.alert("시스템 에러: 반토 고객센터에 문의하세요");
-            //           // props.history.push("/");
-            //           return;
-            //         }
-            //         if (!res.data.data.online) {
-            //           window.alert(
-            //             "충전 스테이션이 아직 네트워크에 연결 되지 않았습니다. 확인 후 다시 시도해 주세요. (전원을 킨 후 1분정도의 시간이 걸릴 수 있습니다)"
-            //           );
-            //           // props.history.push("/");
-            //           return;
-            //         }
-            //         axios.post(
-            //           "https://mulli.world/banto2/app/rent/requestSimpleRent",
-            //           {
-            //             userId: sessionStorage.getItem("userId"),
-            //             stationId: sessionStorage.getItem("stationId"),
-            //             couponId: null
-            //           }
-            //         );
-            //       })
-            //       .then((res) => {
-            //         if (res.data.code !== 200) {
-            //           console.log(res.data.msg);
-            //           props.history.push("/simple/rentfail");
-            //           return;
-            //         }
-            //         console.log("대여완료 res", res);
-            //         props.history.push("/simple/rentcomplete");
-            //       });
-            //   });
+
+          callback={async () => {
+            // console.log("stationId", stationId);
+            axios
+              .post(constants.hosts.banto + "/banto2/app/rent/checkUserRenting", {
+                userId: sessionStorage.getItem("userId")
+              })
+              .then((res) => {
+                if (res.data.code !== 200) {
+                  window.alert("시스템 에러: 반토 고객센터에 문의하세요");
+                  // props.history.push("/");
+                  return;
+                }
+                if (res.data.data.bRenting) {
+                  // window.alert("현재 대여중입니다. 반납후 다시 시도해주세요");
+                  // props.history.push("/");
+                  return;
+                }
+                axios
+                  .post(constants.hosts.banto + "/banto2/app/store/getStationInfo", {
+                    stationId: sessionStorage.getItem("stationId")
+                  })
+                  .then((res) => {
+                    if (res.data.code !== 200) {
+                      // window.alert("시스템 에러: 반토 고객센터에 문의하세요");
+                      // props.history.push("/");
+                      return;
+                    }
+                    if (!res.data.data.online) {
+                      window.alert(
+                        "충전 스테이션이 아직 네트워크에 연결 되지 않았습니다. 확인 후 다시 시도해 주세요. (전원을 킨 후 1분정도의 시간이 걸릴 수 있습니다)"
+                      );
+                      // props.history.push("/");
+                      return;
+                    }
+                    axios.post(
+                      constants.hosts.banto + "/banto2/app/rent/requestSimpleRent",
+                      {
+                        userId: sessionStorage.getItem("userId"),
+                        stationId: sessionStorage.getItem("stationId"),
+                        couponId: null
+                      }
+                    );
+                  })
+                  .then((res) => {
+                    if (res.data.code !== 200) {
+                      alert(res.data.msg + " " + "결제된 금액이 지금 환불됩니다.");
+                      props.history.push("/simple/rentfail");
+                      return;
+                    }
+                    console.log("대여완료 res", res);
+                    props.history.push("/simple/rentcomplete");
+                    return
+                  });
+              });
 
             const result = await axios.post(
-              "https://mulli.world/banto2/app/rent/requestSimpleRent",
+              constants.hosts.banto + "/banto2/app/rent/requestSimpleRent",
               {
-                // userId: sessionStorage.getItem("userId"),
-                userId: "abc",
+                userId: sessionStorage.getItem("userId"),
+                // userId: "abc",
                 stationId: sessionStorage.getItem("stationId"),
                 couponId: null
               }
             );
-            console.log(result);
+
+            // console.log(result);
+
+            if (result.data.code !== 200) {
+              alert(result.data.msg + " " + "결제된 금액이 지금 환불 됩니다")
+              return
+            }
+            props.history.push("/simple/renting");
+
           }}
         >
-          {/* 동의 후 대여하기 */}
-          Renting
-        </button>
+          동의 후 대여하기
+          {/* test rent battery */}
+        </Button>
         <div
           style={{
             width: "100%",
@@ -569,7 +607,6 @@ export default function App(props) {
           }}
           className="purchaseForWebEmptySpace"
         />
-
         <div
           style={{
             position: "fixed",

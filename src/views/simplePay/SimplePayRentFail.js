@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import constants from "../../Constants"
 
 const useStyles = makeStyles({
   returnDiv: {}
@@ -37,10 +38,10 @@ export default function App(props) {
 
   //   axios
   //     .all([
-  //       axios.post("https://mulli.world/banto2/app/user/checkUserPayment", {
+  //       axios.post(constants.hosts.banto + "/banto2/app/user/checkUserPayment", {
   //         userId: "Fs9W4ytEr5MIoqaNoezFgyxAd4v1"
   //       }),
-  //       axios.post("https://mulli.world/banto2/app/rent/checkUserRenting", {
+  //       axios.post(constants.hosts.banto + "/banto2/app/rent/checkUserRenting", {
   //         userId: "Fs9W4ytEr5MIoqaNoezFgyxAd4v1"
   //       })
   //     ])
