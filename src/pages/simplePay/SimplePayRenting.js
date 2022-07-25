@@ -341,7 +341,9 @@ export default function App(props) {
                   <AgreeButton
                     text="확인"
                     onClick={() => {
-                      props.history.push("/");
+                      window.location.replace(
+                        "https://csb-8ehm7l-n7ytrtxex-morenicejay.vercel.app/"
+                      );
                     }}
                   />
                 </Box>
