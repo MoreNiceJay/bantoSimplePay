@@ -21,21 +21,21 @@ const useStyles = makeStyles((theme) => ({
     padding: "10px",
     paddingLeft: "30px",
     paddingRight: "30px",
-    boxSizing: "border-box"
+    boxSizing: "border-box",
   },
   appHeader__logo: { width: "96px", height: "21px" },
   appHeader__menu: {
     "& li": {
-      padding: "10px 0px 10px 30px;"
+      padding: "10px 0px 10px 30px;",
     },
     display: "flex",
     justifyContent: "space-around",
-    listStyle: "none"
+    listStyle: "none",
   },
   introSection: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   appHeaderMobileMenu: { display: "none" },
   hand_img: { left: "15%", width: "540px", height: "auto" },
@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "900",
     letterSpacing: "0.3px",
     fontSize: "40px",
-    lineHeight: "58px"
+    lineHeight: "58px",
   },
   iconContainer: { display: "flex", justifyContent: "start", height: "50%" },
   appstoreIcon: {
@@ -53,20 +53,20 @@ const useStyles = makeStyles((theme) => ({
     width: "105px",
     height: "30px",
     marginRight: "15px",
-    borderRadius: "7px"
+    borderRadius: "7px",
   },
   googleStoreIcon: {
     marginTop: "21px",
     width: "105px",
     height: "30px",
-    borderRadius: "7px"
+    borderRadius: "7px",
   },
   appUsageContainer: {
     margin: "0px auto",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "black"
+    backgroundColor: "black",
   },
   appUsage_texts: {
     color: "#4f3f3f",
@@ -80,20 +80,20 @@ const useStyles = makeStyles((theme) => ({
       fontFamily: "Noto Sans KR",
       fontStyle: "normal",
       fontWeight: "500",
-      fontSize: "24px"
-    }
+      fontSize: "24px",
+    },
   },
   appUsageText_deactive: {
     "&:hover": {
       color: "grey",
-      cursor: "pointer"
-    }
+      cursor: "pointer",
+    },
   },
   appUsageText_active: {
     color: "white",
     "&:hover": {
-      cursor: "pointer"
-    }
+      cursor: "pointer",
+    },
   },
   appUsageImg: {
     marginTop: "202px",
@@ -101,38 +101,38 @@ const useStyles = makeStyles((theme) => ({
     width: "300px",
     height: "auto",
 
-    transition: [".5s", "ease"]
+    transition: [".5s", "ease"],
   },
   thunder_active: {
     width: "10px",
     height: "19px",
     verticalAlign: "middle",
-    marginRight: "10px"
+    marginRight: "10px",
   },
   thunder_deactive: {
     width: "10px",
     height: "19px",
     verticalAlign: "middle",
     marginRight: "10px",
-    visibility: "hidden"
+    visibility: "hidden",
   },
   partnersContainer: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   partnerLogoImg: {
     width: "394px",
     height: "62px",
     marginTop: "318px",
-    marginBottom: "10px"
+    marginBottom: "10px",
   },
   partnerText: {
     fontFamily: "Noto Sans KR",
     fontStyle: "normal",
     fontWeight: "900",
     fontSize: "50px",
-    lineHeight: "72px"
+    lineHeight: "72px",
   },
   partnerButton: {
     width: "300px",
@@ -145,13 +145,13 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "20px",
     lineHeight: "29px",
     marginTop: "60px",
-    marginBottom: "318px"
+    marginBottom: "318px",
   },
   partnershipContainer: {
     backgroundColor: "black",
     display: "flex",
     alignItems: "center",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   partnershipTitle: {
     marginTop: "271px",
@@ -160,32 +160,32 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "900",
     fontSize: "50px",
     color: "#F0F0F0",
-    marginBottom: "60px"
+    marginBottom: "60px",
   },
   partnershipGrid: {
     display: "flex",
     marginBottom: "210px",
     flexWrap: "wrap",
     justifyContent: "space-around",
-    alignContent: "space-around"
+    alignContent: "space-around",
   },
   partnerInsideGrid: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    padding: "16px"
+    padding: "16px",
   },
   footerContainer: {
     display: "flex",
     flexDirection: "column",
     backgroundColor: "black",
-    alignItems: "center"
+    alignItems: "center",
   },
   footerLogo: {
     width: "261px",
     height: "auto",
     marginTop: "60px",
-    marginBottom: "30px"
+    marginBottom: "30px",
   },
 
   footerDivider: {
@@ -193,52 +193,52 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     width: "100%",
     border: "1px solid #4F4F4F",
-    boxSizing: "border-box"
+    boxSizing: "border-box",
   },
   footerTexts: {
     color: "#4f4f4f",
     lineHeight: "30px",
     textAlign: "center",
-    marginBottom: "60px"
+    marginBottom: "60px",
   },
   a: {
     textDecoration: "none",
-    color: "black"
+    color: "black",
   },
   ab: {
     textDecoration: "none",
-    color: "#4f4f4f"
+    color: "#4f4f4f",
   },
   "@media (max-width: 768px)": {
     appHeader: { padding: "10px" },
     appHeader__menu: {
-      display: "none"
+      display: "none",
     },
     appHeaderMobileMenu: {
       display: "block",
       paddingRight: "10px",
       textDecoration: "none",
-      color: "black"
+      color: "black",
     },
 
     introSection: {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      flexDirection: "column-reverse"
+      flexDirection: "column-reverse",
     },
     hand_img: {
       display: "flex",
       alignSelf: "center",
       marginLeft: "5%",
       marginRight: "150px",
-      width: "330px"
+      width: "330px",
     },
     leftTexts: {
-      marginTop: "35px"
+      marginTop: "35px",
     },
     leftText: {
-      textAlign: "center"
+      textAlign: "center",
     },
     iconContainer: { marginTop: "10px" },
     appstoreIcon: { width: "150px", height: "auto", borderRadius: "7px" },
@@ -249,7 +249,7 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "center",
       alignItems: "center",
       backgroundColor: "black",
-      flexDirection: "column-reverse"
+      flexDirection: "column-reverse",
     },
     appUsageImg: { margin: "60px 10px auto", width: "200px", height: "auto" },
     appUsage_texts: {
@@ -260,14 +260,14 @@ const useStyles = makeStyles((theme) => ({
       width: "90%",
       "& li": {
         padding: "15px",
-        fontSize: "18px"
-      }
+        fontSize: "18px",
+      },
     },
     partnerLogoImg: {
       width: "230px",
       height: "auto",
       marginTop: "60px",
-      marginBottom: "45px"
+      marginBottom: "45px",
     },
     partnerText: {
       fontFamily: "Noto Sans KR",
@@ -275,11 +275,11 @@ const useStyles = makeStyles((theme) => ({
       fontWeight: "900",
       fontSize: "40px",
       textAlign: "center",
-      lineHeight: "45px"
+      lineHeight: "45px",
     },
     partnerButton: {
       marginTop: "90px",
-      marginBottom: "60px"
+      marginBottom: "60px",
     },
     partnershipTitle: { margin: "40px auto", fontSize: "38px" },
     partnershipGrid: { marginBottom: "60px" },
@@ -290,20 +290,20 @@ const useStyles = makeStyles((theme) => ({
       top: "0px",
       bottom: "0px",
       left: "0px",
-      right: "0px"
+      right: "0px",
     },
     appHeaderMobileMenuClose: {
       position: "fixed",
       right: "20px",
       top: "10px",
-      color: "black"
+      color: "black",
     },
     appHeader__menuIsOpened: {
       diplay: "fixed",
       padding: "40px 0px 0px 20px",
-      "& li": { padding: "30px" }
-    }
-  }
+      "& li": { padding: "30px" },
+    },
+  },
 }));
 
 export default function App(props) {
@@ -312,7 +312,7 @@ export default function App(props) {
   const [usageState, setUsageState] = React.useState({
     location: true,
     scan: false,
-    charging: false
+    charging: false,
   });
   const [usageImageState, setUsageImageState] = React.useState(
     <img
@@ -332,7 +332,7 @@ export default function App(props) {
     setUsageState({
       location: true,
       scan: false,
-      charging: false
+      charging: false,
     });
     setUsageImageState(
       <img
@@ -346,7 +346,7 @@ export default function App(props) {
     setUsageState({
       location: false,
       scan: true,
-      charging: false
+      charging: false,
     });
     setUsageImageState(
       <img
@@ -360,7 +360,7 @@ export default function App(props) {
     setUsageState({
       location: false,
       scan: false,
-      charging: true
+      charging: true,
     });
     setUsageImageState(
       <img
@@ -379,7 +379,7 @@ export default function App(props) {
       props.history.push({
         pathname: "/select",
         // search: "?query=abc",
-        state: { stationId: stationId }
+        state: { stationId: stationId },
       });
     }
   }, []);
@@ -387,7 +387,7 @@ export default function App(props) {
   const gridDummy = [
     { title: "온클라우드", img: require("../src/assets/img/header_logo.png") },
     { title: "온클라우드", img: require("../src/assets/img/header_logo.png") },
-    { title: "온클라우드", img: require("../src/assets/img/header_logo.png") }
+    { title: "온클라우드", img: require("../src/assets/img/header_logo.png") },
   ];
   if (menuIsOpened) {
     return (
@@ -519,9 +519,7 @@ export default function App(props) {
         <div className={classes.leftTexts}>
           <div className="">
             <p className={classes.leftText}>나의 시간</p>
-            <li>
-
-            </li>
+            <li></li>
             <p className={classes.leftText}>그리고 반토</p>
           </div>
           <div className={classes.iconContainer}>
