@@ -65,6 +65,14 @@ export default function App(props) {
   const [rentResultMassage, setRentResultMassage] = useState("");
 
   useEffect(() => {
+    // window.alert(`
+    // *공지*
+    // 안녕하세요 고객님 
+    // 현재 반토 보조배터리 서비스 이용이 불가합니다
+    // 사유     : 서비스 점검이 진행중 입니다
+    // 점검 일자 : 2022.8.2 05:00 - 8.4 05:00
+    // 이용에 불편을 드려 죄송합니다
+    // `)
     if (userId && stationId) setPage(pageState.purchase);
   }, []);
 
