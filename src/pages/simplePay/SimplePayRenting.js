@@ -74,6 +74,8 @@ export default function App(props) {
 
   const [reason, setReason] = useState("");
 
+  const [promotionUrl, setPromotionUrl] = useState("");
+
   // 사용 시간
   useEffect(() => {
     const interval = setInterval(() => {
@@ -169,20 +171,25 @@ export default function App(props) {
         setReason(data.reason);
         msg += `\n${data.reason}`;
       }
-
-      // props.history.push("/simple/rentcomplete");
     } else {
       setReturnStatus(false);
-
-      // alert(
-      //   `반납은 10초가량 소요될 수 있습니다.\n\n배터리를 꾸욱 눌러주세요.\n\n반납이 되지 않을시 스테이션 뒤의 전원을 껐다 켜주세요`
-      // );
     }
 
     setDialogOpen(true);
 
     return { code: 200 };
   };
+
+  useEffect(() => {
+    (async () => {
+      const { data: promotion } = await axios.post(
+        `${constants.hosts.banto}/banto2/app/partners/promotion`
+        // `http://localhost:3009/banto2/app/partners/promotion`
+      );
+
+      setPromotionUrl(promotion.data.url);
+    })();
+  }, []);
 
   return (
     <Box
@@ -196,9 +203,6 @@ export default function App(props) {
       <CustomCenterBox sx={{ pt: "20%" }}>
         <CustomCenterBox sx={{ p: 3, alignItems: "center" }}>
           <img src={BantoLogo} alt="" />
-          {/* <Typography color="white" fontSize={40} fontWeight={700}>
-            BANTO
-          </Typography> */}
         </CustomCenterBox>
       </CustomCenterBox>
 
@@ -341,7 +345,7 @@ export default function App(props) {
                   <AgreeButton
                     text="확인"
                     onClick={() => {
-                      props.history.push("/");
+                      window.location.replace(promotionUrl);
                     }}
                   />
                 </Box>
