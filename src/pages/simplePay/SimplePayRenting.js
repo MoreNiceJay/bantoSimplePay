@@ -3,7 +3,7 @@ import axios from "axios";
 import constants from "../../Constants";
 import moment from "moment";
 
-import { Stack, Typography, Button } from "@mui/material";
+import { Stack, Typography, Button, Link } from "@mui/material";
 import { Box } from "@mui/system";
 import ReplyIcon from "../../assets/icon/reply.png";
 import CustomCenterBox from "../../components/CustomCenterBox";
@@ -71,6 +71,7 @@ export default function App(props) {
 
   const [dialogOpen, setDialogOpen] = useState(false);
   const [returnStatus, setReturnStatus] = useState(false);
+  const [priceInfo, setPriceInfo] = React.useState("");
 
   const [reason, setReason] = useState("");
 
@@ -98,6 +99,18 @@ export default function App(props) {
       if (store.code === 200) {
         setStoreName(store.data.storeName);
       }
+      const priceInfo = await axios.post(
+        `${constants.hosts.banto}/banto2/app/price/getPriceInfo`,
+        {
+          stationId: sessionStorage.getItem("stationId"),
+        }
+      );
+
+      // console.log(res);
+      if (priceInfo.status !== 200) {
+        console.log(priceInfo.msg);
+      }
+      setPriceInfo(priceInfo.data);
     })();
   }, []);
 
@@ -120,6 +133,7 @@ export default function App(props) {
         window.alert("시스템 에러: 반토 고객센터에 문의하세요");
         return;
       }
+
       setRentStatus(
         result.data.data.bRenting && result.data.data.bRenting.status
       );
@@ -195,7 +209,7 @@ export default function App(props) {
     <Box
       sx={{
         backgroundColor: "#0B0B0C",
-        height: "100%",
+        height: "120vh",
         paddingTop: "50px",
         paddingBottom: "50px",
       }}
@@ -256,21 +270,6 @@ export default function App(props) {
                 }}
               >
                 <Typography color="#94949d" fontSize={14}>
-                  남은 시간
-                </Typography>
-                <Typography color="#EAEBF1" fontWeight={600} fontSize={16}>
-                  -
-                </Typography>
-              </Box>
-
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Typography color="#94949d" fontSize={14}>
                   대여 지점
                 </Typography>
                 <Typography color="#EAEBF1" fontWeight={600} fontSize={16}>
@@ -286,14 +285,33 @@ export default function App(props) {
               >
                 <Box>
                   <Typography color="#94949d" fontSize={14}>
-                    추가 이용료
+                    이용료 안내
                   </Typography>
-                  <Typography color="#94949d" fontSize={14}>
-                    (10분/150원)
+                  <Typography color="#94949d" fontSize={11}>
+                    {`(반납시 결제됩니다)`}
                   </Typography>
                 </Box>
                 <Typography color="#EAEBF1" fontWeight={600} fontSize={16}>
-                  -
+                  {`${priceInfo && priceInfo.data.extraTerm}분/${
+                    priceInfo && priceInfo.data.extraPrice
+                  }원`}
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Typography
+                  color="#EAEBF1"
+                  pt={1}
+                  fontWeight={600}
+                  fontSize={12}
+                  align={"center"}
+                >
+                  반토 스테이션에 반납하시면 자동 이용 완료 됩니다
                 </Typography>
               </Box>
             </Stack>
@@ -318,6 +336,22 @@ export default function App(props) {
           <img src={ReplyIcon} alt="" width="4%" />
         </Button>
       </Box>
+      <Box
+        mt={6}
+        justifyContent="center"
+        alignItems="center"
+        display="flex"
+        flexDirection="column"
+      >
+        <Typography color="white" fontSize={12}>
+          도움이 필요하신가요?
+        </Typography>
+        <a href="https://pf.kakao.com/_eWuNT/chat" target="_blank">
+          <Typography mt={1} color="#359B4A" fontWeight={600} fontSize={12}>
+            반토 고객센터
+          </Typography>
+        </a>
+      </Box>
 
       <Dialog
         fullScreen
@@ -327,7 +361,7 @@ export default function App(props) {
         }}
       >
         <Box sx={{ backgroundColor: "#0B0B0C", height: "100%" }}>
-          <CustomCenterBox sx={{ pt: "50%" }}>
+          <CustomCenterBox sx={{ pt: "40%" }}>
             {returnStatus ? (
               <>
                 <img src={ReturnSuccessImg} alt="" />
@@ -352,22 +386,47 @@ export default function App(props) {
               </>
             ) : (
               <>
-                <img src={ReturnCheckingImg} alt="" />
-                <Box pt={5}>
-                  <Typography color="white" fontSize={24}>
-                    보조배터리 반납 확인 중
+                <Box mt={-12} mb={7} justifyContent="space-between">
+                  <Typography color="white" fontSize={10}>
+                    팁: 반납이 오래 안되는 경우엔
                   </Typography>
-                  <Typography color="white" fontSize={24}>
-                    잠시 후 다시 확인해주세요
+                  <Typography color="white" fontSize={10}>
+                    스테이션의 뒷면 하단의 스위치를 껏다 켜주세요
                   </Typography>
                 </Box>
+                <img src={ReturnCheckingImg} alt="" />
+                <Box pt={4}>
+                  <Typography color="white" fontSize={20}>
+                    보조배터리 반납 확인 중
+                  </Typography>
+                  <Typography color="white" fontSize={16}>
+                    10초 후 다시 확인해주세요
+                  </Typography>
+                </Box>
+
                 <Box pt={5}>
                   <CancleButton
-                    text="돌아가기"
+                    text="확인"
                     onClick={() => {
                       setDialogOpen(false);
                     }}
                   />
+
+                  <Box mt={8} justifyContent="space-between">
+                    <Typography color="white" fontSize={12}>
+                      반납 실패가 지속되면 고객센터로 문의
+                    </Typography>
+                    <a href="https://pf.kakao.com/_eWuNT/chat" target="_blank">
+                      <Typography
+                        mt={1}
+                        color="#359B4A"
+                        fontWeight={600}
+                        fontSize={12}
+                      >
+                        반토 고객센터
+                      </Typography>
+                    </a>
+                  </Box>
                 </Box>
               </>
             )}

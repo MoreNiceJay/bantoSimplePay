@@ -20,14 +20,14 @@ export default function App(props) {
             {/* <Typography color="white" fontSize={40} fontWeight={700}>
               BANTO
             </Typography> */}
-            <Box>
+            {/* <Box sx>
               <img src={UserIcon} alt="" width="30%" />
-            </Box>
+            </Box> */}
           </CustomCenterBox>
 
           <CustomCenterBox>
             <Typography color="white" fontWeight={500} fontSize={18}>
-              등록이 완료됐습니다!
+              결제 등록 완료!
             </Typography>
             <Typography color="white" fontWeight={500} fontSize={18}>
               지금 바로 <span style={{ color: "#00C853" }}>보조배터리</span>를
@@ -38,20 +38,27 @@ export default function App(props) {
           </CustomCenterBox>
         </CustomCenterBox>
 
-        <CustomCenterBox>
+        {/* <CustomCenterBox>
           <Typography color="white" fontSize={15}>
             대여하시겠습니까?
           </Typography>
-        </CustomCenterBox>
+        </CustomCenterBox> */}
 
         <CustomCenterBox>
-          <CancleButton text="다음에 할게요" />
-          <AgreeButton
-            text="대여 할게요"
-            onClick={() => {
-              props.history.push("/simple/login");
-            }}
-          />
+          {/* <CancleButton text="다음에 할게요" /> */}
+          <Box pl={4} pr={4}>
+            <Button
+              sx={{ backgroundColor: "#68E281", color: "black" }}
+              fullWidth
+              variant="contained"
+              size="large"
+              onClick={() => {
+                props.history.push("/simple/login");
+              }}
+            >
+              대여하기
+            </Button>
+          </Box>
         </CustomCenterBox>
       </Box>
     </>

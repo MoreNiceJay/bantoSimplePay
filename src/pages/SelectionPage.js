@@ -1,9 +1,11 @@
 import React from "react";
-import { Stack, Typography } from "@mui/material";
+import { Stack, Typography, Button } from "@mui/material";
 import CustomCenterBox from "../components/CustomCenterBox";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Box } from "@mui/system";
 import BantoLogo from "../assets/icon/banto_text_logo.png";
+import Battery20Icon from "@mui/icons-material/Battery20";
+import CustomLeftBox from "../components/CustomLeftBox";
 
 export default function App(props) {
   const [stationId, setStationId] = React.useState("");
@@ -26,6 +28,12 @@ export default function App(props) {
       return "other";
     }
   }
+  function rentButtonTapped() {
+    props.history.push({
+      pathname: "/simple/login",
+      state: { stationId: stationId },
+    });
+  }
 
   React.useEffect(() => {
     console.log(checkMobile());
@@ -36,7 +44,7 @@ export default function App(props) {
     }
     // window.alert(`
     // *공지*
-    // 안녕하세요 고객님 
+    // 안녕하세요 고객님
     // 현재 반토 보조배터리 서비스 이용이 불가합니다
     // 사유     : 서비스 점검이 진행중 입니다
     // 점검 일자 : 2022.8.2 05:00 - 8.4 05:00
@@ -50,72 +58,27 @@ export default function App(props) {
         {/* <Typography color="white" fontSize={40} fontWeight={700}>
           BANTO
         </Typography> */}
-        <Typography color="white">반토 보조배터리 대여서비스</Typography>
+        <Typography color="white">보조배터리 대여서비스</Typography>
       </CustomCenterBox>
 
-      <Stack pt={4}>
-        <Box p={4}>
-          <Box
-            sx={{
-              backgroundColor: "white",
-              boxShadow: "0px 5px 14px #000000",
-              height: "184px",
-              borderRadius: "20px",
-            }}
-            onClick={() => {
-              props.history.push({
-                pathname: "/simple/login",
-                state: { stationId: stationId },
-              });
-            }}
-          >
-            <Stack direction="row" p={3} spacing={8}>
-              <Stack spacing={2}>
-                <Typography fontWeight={900} fontSize={26}>
-                  간편 이용
-                </Typography>
-                <Box>
-                  <Typography fontWeight={500} fontSize={12}>
-                    앱 다운 없이 배터리를
-                  </Typography>
-                  <Typography fontWeight={500} fontSize={12}>
-                    대여할 수 있습니다
-                  </Typography>
-                </Box>
-                <Box
-                  sx={{
-                    p: 1,
-                    pl: 2,
-                    pr: 2,
-                    backgroundColor: "black",
-                    color: "white",
-                    borderRadius: "8px",
-                    textAlign: "center",
-                  }}
-                >
-                  <Typography fontWeight={600} fontSize={12}>
-                    결제수단 등록하러 가기
-                  </Typography>
-                </Box>
-              </Stack>
-
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                }}
-              >
-                <ArrowForwardIosIcon
-                  sx={{
-                    fontSize: 50,
-                  }}
-                />
-              </Box>
-            </Stack>
-          </Box>
-        </Box>
-      </Stack>
+      <CustomLeftBox sx={{ p: 4, mt: 8 }}>
+        <Typography color="white">앱 다운 없이</Typography>
+        <Typography color="white" fontWeight={500}>
+          <span style={{ color: "#68E281" }}>보조배터리</span>를 대여하세요
+        </Typography>
+      </CustomLeftBox>
+      <Box pl={4} pr={4}>
+        <Button
+          sx={{ backgroundColor: "#68E281", color: "black" }}
+          fullWidth
+          variant="contained"
+          size="large"
+          onClick={rentButtonTapped}
+        >
+          대여하기
+          <Battery20Icon />
+        </Button>
+      </Box>
     </Box>
   );
 }

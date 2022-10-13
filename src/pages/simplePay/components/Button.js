@@ -9,15 +9,15 @@ export default function CustomButton(props) {
       sx={{
         height: "66px",
         width: "90%",
-        backgroundColor: "#0B0B0C",
+        backgroundColor: "#00C853",
         borderRadius: "15px",
         border: "2px solid #00C853",
         fontWeight: "500",
         fontSize: "18px",
         position: "fixed",
         left: "5%",
-        bottom: "10%",
-        color: "#00C853",
+        bottom: "5%",
+        color: "#0B0B0C",
       }}
       disabled={isDisabled}
       onClick={async () => {

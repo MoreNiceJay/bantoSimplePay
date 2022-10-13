@@ -67,7 +67,7 @@ export default function App(props) {
   useEffect(() => {
     // window.alert(`
     // *공지*
-    // 안녕하세요 고객님 
+    // 안녕하세요 고객님
     // 현재 반토 보조배터리 서비스 이용이 불가합니다
     // 사유     : 서비스 점검이 진행중 입니다
     // 점검 일자 : 2022.8.2 05:00 - 8.4 05:00
@@ -99,7 +99,7 @@ export default function App(props) {
   useEffect(() => {
     if (page === pageState.login) {
       if (checkMobile() == "ios") {
-        enqueueSnackbar("로그인 후 좌측 상단 ◀︎ Safari 를 클릭해주세요", {
+        enqueueSnackbar("카카오 로그인후, ◀︎ Safari 를 터치하세요", {
           variant: "info",
           anchorOrigin: {
             vertical: "top",
@@ -490,10 +490,10 @@ export default function App(props) {
             </CustomCenterBox>
 
             <CustomLeftBox sx={{ p: 5 }}>
-              <Typography color="white">간편 결제를 이용하시려면</Typography>
+              <Typography color="white">카카오 로그인 후,</Typography>
               <Typography color="white" fontWeight={500}>
-                <span style={{ color: "#FFD95A" }}>카카오 계정 로그인</span>을
-                이용하셔야 합니다.
+                <span style={{ color: "#FFD95A" }}>브라우저(크롬,사파리)</span>
+                로 돌아와 주세요
               </Typography>
             </CustomLeftBox>
 
@@ -670,7 +670,7 @@ export default function App(props) {
                       {storeName}
                     </Typography>
                   </Box>
-                  <Box
+                  {/* <Box
                     sx={{
                       display: "flex",
                       flexDirection: "row",
@@ -683,13 +683,14 @@ export default function App(props) {
                     <Typography color="#EAEBF1" fontWeight={600} fontSize={16}>
                       {defaultPrice}
                     </Typography>
-                  </Box>
+                  </Box> */}
                   <Box
                     sx={{
                       display: "flex",
                       flexDirection: "row",
                       justifyContent: "space-between",
                     }}
+                    객
                   >
                     <Typography color="#94949d" fontSize={14}>
                       추가 이용 금액
@@ -755,7 +756,7 @@ export default function App(props) {
           </CustomCenterBox>
 
           <CustomButton className="purchaseForWebButton" callback={handleRent}>
-            동의 후 대여하기
+            대여하기
           </CustomButton>
 
           {/* 약관 */}

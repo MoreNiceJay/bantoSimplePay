@@ -4,13 +4,13 @@ import Paper from "@material-ui/core/Paper";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "./components/Button"
+import Button from "./components/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import constants from "../../Constants"
+import constants from "../../Constants";
 
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
@@ -24,8 +24,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3)
-  }
+    padding: theme.spacing(2, 4, 3),
+  },
 }));
 export default function App(props) {
   const classes = useStyles();
@@ -45,14 +45,15 @@ export default function App(props) {
     if (props.location.state !== undefined) {
       setStationId(props.location.state.stationId);
     }
-
   }, []);
   React.useEffect(() => {
     (async () => {
-      const userRentInfo = await axios
-        .post(constants.hosts.banto + "/banto2/app/rent/checkUserRenting", {
-          userId: sessionStorage.getItem("userId")
-        })
+      const userRentInfo = await axios.post(
+        constants.hosts.banto + "/banto2/app/rent/checkUserRenting",
+        {
+          userId: sessionStorage.getItem("userId"),
+        }
+      );
 
       if (userRentInfo.data.code !== 200) {
         window.alert("시스템 에러: 반토 고객센터에 문의하세요");
@@ -64,9 +65,8 @@ export default function App(props) {
         props.history.push("/simple/renting");
         return;
       }
-    })()
-
-  }, [])
+    })();
+  }, []);
 
   const handleClose = () => {
     setOpen(false);
@@ -79,7 +79,7 @@ export default function App(props) {
           height: "80%",
           top: `50%`,
           left: `50%`,
-          transform: `translate(-50%, -50%)`
+          transform: `translate(-50%, -50%)`,
         }}
         className={classes.paper}
       >
@@ -132,11 +132,12 @@ export default function App(props) {
 
   React.useEffect(() => {
     (async () => {
-
-      const checkUserPayment = await axios
-        .post(constants.hosts.banto + "/banto2/app/user/checkUserPayment", {
-          userId: sessionStorage.getItem("userId")
-        })
+      const checkUserPayment = await axios.post(
+        constants.hosts.banto + "/banto2/app/user/checkUserPayment",
+        {
+          userId: sessionStorage.getItem("userId"),
+        }
+      );
 
       if (checkUserPayment.data.code !== 200) {
       }
@@ -149,11 +150,12 @@ export default function App(props) {
       } else {
       }
 
-      const priceInfo = await axios
-        .post(constants.hosts.banto +
-          "/banto2/app/price/getPriceInfo", {
-          stationId: sessionStorage.getItem("stationId")
-        })
+      const priceInfo = await axios.post(
+        constants.hosts.banto + "/banto2/app/price/getPriceInfo",
+        {
+          stationId: sessionStorage.getItem("stationId"),
+        }
+      );
 
       // console.log(res);
       if (priceInfo.status !== 200) {
@@ -161,24 +163,24 @@ export default function App(props) {
       }
       setPriceInfo(priceInfo.data);
 
-      const storeName = await axios
-        .post(constants.hosts.banto + "/banto2/app/store/getStoreName", {
+      const storeName = await axios.post(
+        constants.hosts.banto + "/banto2/app/store/getStoreName",
+        {
           // stationId: sessionStorage.getItem("stationId")
-          stationId: sessionStorage.getItem("stationId")
-        })
+          stationId: sessionStorage.getItem("stationId"),
+        }
+      );
       // if (value.data.code !== 200) {
       //   window.alert(value.data.msg);
       //   // props.history.push();
       // }
       let storeelem = document.getElementById("storeName");
       if (typeof elem === "undefined") {
-        storeelem.innerHTML = ""
-        return
+        storeelem.innerHTML = "";
+        return;
       }
       storeelem.innerHTML = storeName.data.data.storeName;
-
-    })()
-
+    })();
   }, []);
   return (
     <>
@@ -188,7 +190,7 @@ export default function App(props) {
           width: "100vw",
           height: "100vh",
           backgroundColor: "#0B0B0C",
-          overflow: "auto"
+          overflow: "auto",
         }}
       >
         <div
@@ -202,7 +204,7 @@ export default function App(props) {
               fontWeight: " bold",
               fontSize: " 20px",
               lineHeight: " 30px",
-              color: "#eaebf1"
+              color: "#eaebf1",
             }}
           >
             락해제금액
@@ -215,7 +217,7 @@ export default function App(props) {
               fontSize: "50px",
               lineHeight: "74px",
               color: "#00e676",
-              height: "74px"
+              height: "74px",
             }}
           >
             {priceInfo && numberWithCommas(priceInfo.data.basePrice)}원
@@ -230,7 +232,7 @@ export default function App(props) {
               background: "#000000",
               border: "2px solid #242427",
               boxSizing: "border-box",
-              borderRadius: "15px"
+              borderRadius: "15px",
             }}
           >
             <div
@@ -242,7 +244,7 @@ export default function App(props) {
                 lineHeight: "21px",
                 color: "#c0c1c5",
                 marginLeft: "18px",
-                marginTop: "40px"
+                marginTop: "40px",
               }}
             >
               <p
@@ -252,7 +254,7 @@ export default function App(props) {
                   fontWeight: "normal",
                   fontSize: "14px",
                   lineHeight: "21px",
-                  color: "#c0c1c5"
+                  color: "#c0c1c5",
                 }}
               >
                 *최종 결제내역은 보조배터리 반납 후 확인할 수 있습니다.
@@ -267,7 +269,7 @@ export default function App(props) {
                   color: "#c0c1c5",
                   marginTop: "16px",
                   marginBottom: "50px",
-                  marginRight: "16px"
+                  marginRight: "16px",
                 }}
               >
                 *미반납 시({priceInfo && priceInfo.data.missingTime}
@@ -281,7 +283,7 @@ export default function App(props) {
                 border: "1px solid #050505",
                 marginLeft: "18px",
                 marginRight: "18px",
-                marginBottom: "16px"
+                marginBottom: "16px",
               }}
             />
             <div
@@ -290,7 +292,7 @@ export default function App(props) {
                 marginTop: "16px",
                 marginBottom: "16px",
                 flexDirection: "column",
-                justifyContent: "space-around"
+                justifyContent: "space-around",
               }}
             >
               <div
@@ -302,7 +304,7 @@ export default function App(props) {
                   justifyContent: "space-between",
                   marginLeft: "16px",
                   marginRight: "16px",
-                  color: "#c0c1c5"
+                  color: "#c0c1c5",
                 }}
                 className="purchaseDetailLittleContainer"
               >
@@ -313,7 +315,7 @@ export default function App(props) {
                     fontWeight: "normal",
                     fontSize: "14px",
                     lineHeight: "21px",
-                    color: "#94949d"
+                    color: "#94949d",
                   }}
                   className="purchaseDetailLittleTextTag"
                 >
@@ -326,7 +328,7 @@ export default function App(props) {
                     fontWeight: "600",
                     fontSize: "16px",
                     lineHeight: "19px",
-                    color: "#EAEBF1"
+                    color: "#EAEBF1",
                   }}
                   className="purchaseDetailLittleText"
                   id="storeName"
@@ -344,7 +346,7 @@ export default function App(props) {
                   justifyContent: "space-between",
                   marginLeft: "16px",
                   marginRight: "16px",
-                  color: "#c0c1c5"
+                  color: "#c0c1c5",
                 }}
                 className="purchaseDetailLittleContainer"
               >
@@ -355,7 +357,7 @@ export default function App(props) {
                     fontWeight: "normal",
                     fontSize: "14px",
                     lineHeight: "21px",
-                    color: "#94949d"
+                    color: "#94949d",
                   }}
                   className="purchaseDetailLittleTextTag"
                 >
@@ -368,7 +370,7 @@ export default function App(props) {
                     fontWeight: "600",
                     fontSize: "16px",
                     lineHeight: "19px",
-                    color: "#EAEBF1"
+                    color: "#EAEBF1",
                   }}
                   className="purchaseDetailLittleText"
                 >
@@ -385,7 +387,7 @@ export default function App(props) {
                   justifyContent: "space-between",
                   marginLeft: "16px",
                   marginRight: "16px",
-                  color: "#c0c1c5"
+                  color: "#c0c1c5",
                 }}
                 className="purchaseDetailLittleContainer"
               >
@@ -396,7 +398,7 @@ export default function App(props) {
                     fontWeight: "normal",
                     fontSize: "14px",
                     lineHeight: "21px",
-                    color: "#94949d"
+                    color: "#94949d",
                   }}
                   className="purchaseDetailLittleTextTag"
                 >
@@ -409,7 +411,7 @@ export default function App(props) {
                     fontStyle: "normal",
                     fontWeight: "600",
                     fontSize: "16px",
-                    lineHeight: "19px"
+                    lineHeight: "19px",
                   }}
                   className="purchaseDetailLittleText"
                 >
@@ -426,7 +428,7 @@ export default function App(props) {
                   justifyContent: "space-between",
                   marginLeft: "16px",
                   marginRight: "16px",
-                  color: "#c0c1c5"
+                  color: "#c0c1c5",
                 }}
                 className="purchaseDetailLittleContainer"
               >
@@ -437,7 +439,7 @@ export default function App(props) {
                     fontWeight: "normal",
                     fontSize: "14px",
                     lineHeight: "21px",
-                    color: "#94949d"
+                    color: "#94949d",
                   }}
                   className="purchaseDetailLittleTextTag"
                 >
@@ -451,7 +453,7 @@ export default function App(props) {
                     fontWeight: "600",
                     fontSize: "16px",
                     lineHeight: "19px",
-                    color: "#EAEBF1"
+                    color: "#EAEBF1",
                   }}
                   className="purchaseDetailLittleText"
                 >
@@ -468,7 +470,7 @@ export default function App(props) {
             marginRight: "16px",
             marginTop: "32px",
             lineHeight: "20px",
-            textAlign: "center"
+            textAlign: "center",
           }}
         >
           반토의{" "}
@@ -480,7 +482,7 @@ export default function App(props) {
             style={{
               textDecoration: "underline",
               lineHeight: "20px",
-              color: "#535362"
+              color: "#535362",
             }}
           >
             이용약관
@@ -494,7 +496,7 @@ export default function App(props) {
             style={{
               textDecoration: "underline",
               lineHeight: "20px",
-              color: "#535362"
+              color: "#535362",
             }}
           >
             개인정보처리방침
@@ -521,13 +523,15 @@ export default function App(props) {
           //   marginRight: "16px"
           // }}
           className="purchaseForWebButton"
-
           callback={async () => {
             // console.log("stationId", stationId);
             axios
-              .post(constants.hosts.banto + "/banto2/app/rent/checkUserRenting", {
-                userId: sessionStorage.getItem("userId")
-              })
+              .post(
+                constants.hosts.banto + "/banto2/app/rent/checkUserRenting",
+                {
+                  userId: sessionStorage.getItem("userId"),
+                }
+              )
               .then((res) => {
                 if (res.data.code !== 200) {
                   window.alert("시스템 에러: 반토 고객센터에 문의하세요");
@@ -540,9 +544,12 @@ export default function App(props) {
                   return;
                 }
                 axios
-                  .post(constants.hosts.banto + "/banto2/app/store/getStationInfo", {
-                    stationId: sessionStorage.getItem("stationId")
-                  })
+                  .post(
+                    constants.hosts.banto + "/banto2/app/store/getStationInfo",
+                    {
+                      stationId: sessionStorage.getItem("stationId"),
+                    }
+                  )
                   .then((res) => {
                     if (res.data.code !== 200) {
                       // window.alert("시스템 에러: 반토 고객센터에 문의하세요");
@@ -557,23 +564,26 @@ export default function App(props) {
                       return;
                     }
                     axios.post(
-                      constants.hosts.banto + "/banto2/app/rent/requestSimpleRent",
+                      constants.hosts.banto +
+                        "/banto2/app/rent/requestSimpleRent",
                       {
                         userId: sessionStorage.getItem("userId"),
                         stationId: sessionStorage.getItem("stationId"),
-                        couponId: null
+                        couponId: null,
                       }
                     );
                   })
                   .then((res) => {
                     if (res.data.code !== 200) {
-                      alert(res.data.msg + " " + "결제된 금액이 지금 환불됩니다.");
+                      alert(
+                        res.data.msg + " " + "결제된 금액이 지금 환불됩니다."
+                      );
                       props.history.push("/simple/rentfail");
                       return;
                     }
                     console.log("대여완료 res", res);
                     props.history.push("/simple/rentcomplete");
-                    return
+                    return;
                   });
               });
 
@@ -583,18 +593,17 @@ export default function App(props) {
                 userId: sessionStorage.getItem("userId"),
                 // userId: "abc",
                 stationId: sessionStorage.getItem("stationId"),
-                couponId: null
+                couponId: null,
               }
             );
 
             // console.log(result);
 
             if (result.data.code !== 200) {
-              alert(result.data.msg + " " + "결제된 금액이 지금 환불 됩니다")
-              return
+              alert(result.data.msg + " " + "결제된 금액이 지금 환불 됩니다");
+              return;
             }
             props.history.push("/simple/renting");
-
           }}
         >
           동의 후 대여하기
@@ -603,7 +612,7 @@ export default function App(props) {
         <div
           style={{
             width: "100%",
-            height: "300px"
+            height: "300px",
           }}
           className="purchaseForWebEmptySpace"
         />
@@ -612,7 +621,7 @@ export default function App(props) {
             position: "fixed",
             left: "16px",
             right: "16px",
-            bottom: "50px"
+            bottom: "50px",
           }}
           className="purchaseForWebButtonContainer"
         ></div>
